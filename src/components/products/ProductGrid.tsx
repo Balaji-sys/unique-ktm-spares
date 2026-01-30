@@ -109,7 +109,7 @@ export default function ProductGrid({ filters }: ProductGridProps) {
                 <div
                     className={
                         viewMode === 'grid'
-                            ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'
+                            ? 'grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6'
                             : 'flex flex-col space-y-4'
                     }
                 >
@@ -117,8 +117,8 @@ export default function ProductGrid({ filters }: ProductGridProps) {
                         <ProductCard
                             key={product.id}
                             product={product}
-                            viewMode={viewMode}
-                            onQuickView={handleQuickView}
+                          
+                           
                         />
                     ))}
                 </div>
@@ -133,6 +133,8 @@ export default function ProductGrid({ filters }: ProductGridProps) {
                     </p>
                 </div>
             )}
+            
+
 
             {/* Quick View Modal */}
             <QuickViewModal

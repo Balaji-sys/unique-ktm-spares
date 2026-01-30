@@ -9,6 +9,8 @@ import FilterSidebar from '@/components/products/FilterSidebar';
 import { Filter, X } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
+
+
 function ProductsPageContent() {
     const searchParams = useSearchParams();
     const categoryParam = searchParams.get('category') || '';

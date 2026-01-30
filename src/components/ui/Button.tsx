@@ -1,39 +1,55 @@
+'use client';
+
 import React from 'react';
-import { cn } from '@/lib/utils';
+import clsx from 'clsx';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'outline';
-    size?: 'sm' | 'md' | 'lg';
-    children: React.ReactNode;
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
 }
 
+'transition-all duration-300 ease-out'
+'hover:-translate-y-0.5 hover:shadow-lg'
+
 export default function Button({
-    variant = 'primary',
-    size = 'md',
-    className,
-    children,
-    ...props
+  variant = 'primary',
+  size = 'md',
+  className,
+  children,
+  ...props
 }: ButtonProps) {
-    const baseStyles = 'font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed';
+  return (
+    <button
+      {...props}
+      className={clsx(
+        // Base styles
+        'inline-flex items-center justify-center font-semibold',
+        'rounded-lg transition-all duration-300',
+        'focus:outline-none focus:ring-2 focus:ring-ktm-orange/40',
 
-    const variants = {
-        primary: 'bg-gradient-ktm text-white hover:shadow-ktm transform hover:scale-105',
-        secondary: 'bg-ktm-black text-white hover:bg-ktm-black-light',
-        outline: 'border-2 border-ktm-orange text-ktm-orange hover:bg-ktm-orange hover:text-white',
-    };
+        // Variants
+        {
+          'bg-ktm-orange text-white hover:shadow-lg hover:-translate-y-0.5':
+            variant === 'primary',
 
-    const sizes = {
-        sm: 'py-2 px-4 text-sm',
-        md: 'py-3 px-8 text-base',
-        lg: 'py-4 px-10 text-lg',
-    };
+          'bg-black text-white hover:bg-ktm-orange':
+            variant === 'secondary',
 
-    return (
-        <button
-            className={cn(baseStyles, variants[variant], sizes[size], className)}
-            {...props}
-        >
-            {children}
-        </button>
-    );
+          'border border-gray-300 text-gray-800 hover:border-ktm-orange hover:text-ktm-orange':
+            variant === 'outline',
+        },
+
+        // Sizes
+        {
+          'px-4 py-2 text-sm': size === 'sm',
+          'px-6 py-2.5 text-base': size === 'md',
+          'px-8 py-3 text-lg': size === 'lg',
+        },
+
+        className
+      )}
+    >
+      {children}
+    </button>
+  );
 }
